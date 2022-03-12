@@ -1,0 +1,147 @@
+{
+        "tasks": [
+                {
+                        "type": "shell",
+                        "label": "download code",
+                        "command": "oj-prepare",
+                        "args": [
+                                "${input:url}",
+                        ],
+                        "problemMatcher": []
+                },
+                {
+                        "type": "cppbuild",
+                        "label": "build code",
+                        "command": "/usr/bin/g++",
+                        "args": [
+                                "-fdiagnostics-color=always",
+                                "-std=gnu++17",
+                                "-g",
+                                "-Wall",
+                                "${file}",
+                                "-I",
+                                "~/ac-library",
+                                "-o",
+                                "${fileDirname}/a.out"
+                        ],
+                        "options": {
+                                "cwd": "${fileDirname}"
+                        },
+                        "problemMatcher": [
+                                "$gcc"
+                        ],
+                        "group": {
+                                "kind": "none"
+                        },
+                        "presentation": {
+                                "reveal": "always",
+                                "panel": "shared",
+                                "focus": true,
+                                "clear": true
+                        }
+                },
+                {
+                        "type": "shell",
+                        "label": "run code",
+                        "command": "./a.out",
+                        "options": {
+                                "cwd": "${fileDirname}"
+                        },
+                        "group": {
+                                "kind": "none",
+                                "isDefault": true
+                        },
+                        "problemMatcher": [],
+                        "dependsOn": [
+                                "build code"
+                        ],
+                        "presentation": {
+                                "reveal": "always",
+                                "panel": "shared",
+                                "focus": true
+                        }
+                },
+                {
+                        "type": "shell",
+                        "label": "login",
+                        "command": "oj",
+                        "args": [
+                                "login",
+                                "${input:url}",
+                                "-u",
+                                "${input:user}",
+                                "-p",
+                                "${input:password}",
+                        ],
+                        "problemMatcher": [],
+                        "options": {},
+                },
+                {
+                        "type": "shell",
+                        "label": "test code",
+                        "command": "oj",
+                        "args": [
+                                "t"
+                        ],
+                        "options": {
+                                "cwd": "${fileDirname}"
+                        },
+                        "group": {
+                                "kind": "test",
+                                "isDefault": true
+                        },
+                        "problemMatcher": [],
+                        "dependsOn": [
+                                "build code"
+                        ],
+                        "presentation": {
+                                "reveal": "always",
+                                "panel": "shared",
+                                "focus": true
+                        }
+                },
+                {
+                        "type": "shell",
+                        "label": "submit code",
+                        "command": "oj",
+                        "args": [
+                                "s",
+                                "-y",
+                                "${fileBasename}"
+                        ],
+                        "options": {
+                                "cwd": "${fileDirname}"
+                        },
+                        "group": {
+                                "kind": "build"
+                        },
+                        "problemMatcher": [],
+                        "dependsOn": [
+                                "test code"
+                        ],
+                        "presentation": {
+                                "reveal": "always",
+                                "panel": "shared",
+                                "focus": true
+                        }
+                }
+        ],
+        "inputs": [
+                {
+                        "id": "url",
+                        "description": "url:",
+                        "type": "promptString"
+                },
+                {
+                        "id": "user",
+                        "description": "user:",
+                        "type": "promptString"
+                },
+                {
+                        "id": "password",
+                        "description": "password:",
+                        "type": "promptString"
+                }
+        ],
+        "version": "2.0.0"
+}

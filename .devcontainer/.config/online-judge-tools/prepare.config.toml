@@ -1,0 +1,6 @@
+contest_directory = "/home/vscode/coding/contest/{service_domain}/{contest_id}/{problem_id}"
+problem_directory = "."
+
+[templates]
+"main.cpp" = "main.cpp"
+"generate.py" = "generate.py"
